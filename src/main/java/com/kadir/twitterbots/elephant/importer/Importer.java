@@ -11,11 +11,7 @@ import com.kadir.twitterbots.ratelimithandler.handler.RateLimitHandler;
 import com.kadir.twitterbots.ratelimithandler.process.ApiProcessType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import twitter4j.Relationship;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.User;
-import twitter4j.UserList;
+import twitter4j.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,7 +46,7 @@ public class Importer {
         }
     }
 
-    public void authenticate() {
+    private void authenticate() {
         twitter = BotAuthenticator.authenticate(ElephantConstants.PROPERTIES_FILE_NAME, ElephantConstants.API_KEYS_PREFIX);
     }
 
@@ -93,9 +89,6 @@ public class Importer {
 
         } catch (TwitterException e) {
             logger.error(e.getMessage());
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            logger.error("failed to handle rate limit", e);
         }
     }
 
@@ -119,9 +112,6 @@ public class Importer {
                 }
             } catch (TwitterException e) {
                 logger.error(e.getMessage());
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                logger.error("failed to handle rate limit", e);
             }
         }
 
