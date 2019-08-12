@@ -1,5 +1,6 @@
 # elephant
 
+[![Build Status](https://travis-ci.org/akadir/elephant.svg?branch=master)](https://travis-ci.org/akadir/elephant)
 [![gradle-version](https://img.shields.io/badge/gradle-5.5.1-brightgreen)](https://img.shields.io/badge/gradle-5.5.1-brightgreen)
 
 Import twitter lists from json formatted file to twitter account. 
