@@ -3,18 +3,32 @@ group 'com.kadir.twitterbots'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
 
 repositories {
-    mavenCentral()
+  mavenCentral()
+}
+
+jar {
+  manifest {
+    attributes('Main-Class': 'com.kadir.twitterbots.elephant.Elephant')
+  }
+}
+
+task run(type: JavaExec) {
+  group = 'Run'
+  description = 'Import twitter lists from file to twitter account'
+
+  classpath sourceSets.main.runtimeClasspath
+  main = "com.kadir.twitterbots.elephant.Elephant"
 }
 
 dependencies {
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-    compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.7'
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
-    compile project(":bot-authenticator")
-    compile project(":rate-limit-handler")
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+  implementation 'com.kadir.twitterbots.commons:bot-authenticator:1.0'
+  implementation 'com.kadir.twitterbots.commons:rate-limit-handler:1.0'
+  compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+  compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+  compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.7'
+  compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+  testCompile group: 'junit', name: 'junit', version: '4.12'
 }
